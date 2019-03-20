@@ -1,6 +1,3 @@
 <resources>
-    <string name="app_name">MenuDémarrage</string>
-
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="app_name">Lord_of_the_Blooners_Client</string>
 </resources>

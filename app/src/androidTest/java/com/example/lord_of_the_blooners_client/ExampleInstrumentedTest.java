@@ -1,4 +1,4 @@
-package com.example.menudmarrage;
+package com.example.lord_of_the_blooners_client;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.menudmarrage", appContext.getPackageName());
+        assertEquals("com.example.lord_of_the_blooners_client", appContext.getPackageName());
     }
 }

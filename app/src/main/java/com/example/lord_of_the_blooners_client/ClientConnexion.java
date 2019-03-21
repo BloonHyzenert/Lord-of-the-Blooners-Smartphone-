@@ -1,16 +1,19 @@
 package com.example.lord_of_the_blooners_client;
 
+import android.os.AsyncTask;
+
 import java.io.BufferedInputStream;
 
 import java.io.IOException;
 
 import java.io.PrintWriter;
 
+import java.net.InetAddress;
 import java.net.Socket;
 
 import java.net.UnknownHostException;
 
-public class ClientConnexion implements Runnable{
+public class ClientConnexion extends AsyncTask<Void,Void,Void> {
 
 
     private Socket connexion = null;
@@ -21,25 +24,29 @@ public class ClientConnexion implements Runnable{
 
     private String command ;
 
-    private String name = "Bloon";
-
     private Player player;
 
-    private String host = "10.0.2.2";
+    private String host = "192.168.1.2";
 
     private int port = 7777;
 
-    public ClientConnexion(){
-        try {
-            connexion = new Socket(host, port);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public void run(){
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+        String name = "Bloon";
+
+
+        if(connexion==null) {
+            try {
+                InetAddress hostAddress = InetAddress.getByName(host);
+                connexion = new Socket(hostAddress, port);
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         try {
             writer = new PrintWriter(connexion.getOutputStream(), true);
@@ -90,6 +97,15 @@ public class ClientConnexion implements Runnable{
                 e.printStackTrace();
             }
         }
+
+        return null;
+    }
+
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+
     }
 
 

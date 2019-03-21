@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import static android.os.AsyncTask.execute;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         mFeedback = findViewById(R.id.textView);
 
 
-        Thread t = new Thread(new ClientConnexion());
-        t.start();
+        ClientConnexion client=new ClientConnexion();
+        client.execute();
 
         mFeedback.setText("BLOOOOOOOOOOOOOOOOOOOOOOON!");
     }

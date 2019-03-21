@@ -1,4 +1,4 @@
-package com.example.menudmarrage;
+package com.example.lord_of_the_blooners_client;
 
 import org.junit.Test;
 

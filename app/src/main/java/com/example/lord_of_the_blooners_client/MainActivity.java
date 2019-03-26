@@ -11,6 +11,7 @@ import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 import static android.os.AsyncTask.execute;
 
+#define PI 3.1415
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
             public void onMove(int angle, int strength) {
                 mForce.setText("Force : " + strength +"%");
                 mAngle.setText("Angle : " + angle +"°");
+                double deltaX = cos(angle/180 * PI) * (strength/100);
+                double deltaY = sin(angle/180 * PI) * (strength/100);
             }
         });
     }

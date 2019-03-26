@@ -7,24 +7,36 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import io.github.controlwear.virtual.joystick.android.JoystickView;
+
 import static android.os.AsyncTask.execute;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mFeedback;
+    private TextView mForce;
+    private TextView mAngle;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mFeedback = findViewById(R.id.textView);
+        mForce = findViewById(R.id.textView);
+        mAngle = findViewById(R.id.textView2);
+
 
 
         ClientConnexion client=new ClientConnexion();
         client.execute();
 
-        mFeedback.setText("BLOOOOOOOOOOOOOOOOOOOOOOON!");
+        JoystickView joystick = (JoystickView) findViewById(R.id.joystickView);
+        joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
+            @Override
+            public void onMove(int angle, int strength) {
+                mForce.setText("Force : " + strength +"%");
+                mAngle.setText("Angle : " + angle +"°");
+            }
+        });
     }
 }

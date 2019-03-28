@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     public static class PlaceholderFragment extends FXFragment {
 
         public PlaceholderFragment() {
-            String fxapp = "your.package.myfragment.MainFX";
+            String fxapp = "com.example.lord_of_the_blooners.MainFragment.MainFX";
             this.setName(fxapp);
         }
 

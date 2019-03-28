@@ -1,4 +1,4 @@
-package your.package.myfragment;
+package com.example.lord_of_the_blooners.MainFragment;
 
 public class MainFX extends Application {
 

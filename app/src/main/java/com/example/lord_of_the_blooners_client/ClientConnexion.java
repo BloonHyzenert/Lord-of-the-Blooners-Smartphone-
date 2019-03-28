@@ -26,7 +26,7 @@ public class ClientConnexion extends AsyncTask<Void,Void,Void> {
 
     private Player player;
 
-    private String host = "192.168.1.2";
+    private String host = "161.3.26.62";
 
     private int port = 7777;
 
@@ -40,24 +40,21 @@ public class ClientConnexion extends AsyncTask<Void,Void,Void> {
         if(connexion==null) {
             try {
                 InetAddress hostAddress = InetAddress.getByName(host);
-                connexion = new Socket(hostAddress, port);
+                connexion = new Socket(host, port);
             } catch (UnknownHostException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        if(connexion!=null) {
 
-        try {
-            writer = new PrintWriter(connexion.getOutputStream(), true);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-
-        try {
-            reader = new BufferedInputStream(connexion.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                writer = new PrintWriter(connexion.getOutputStream(), true);
+                reader = new BufferedInputStream(connexion.getInputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         while (connexion!=null) {

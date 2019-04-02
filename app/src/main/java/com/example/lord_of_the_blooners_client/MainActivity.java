@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         ClientConnexion client=new ClientConnexion();
         client.execute();
 
-        JoystickView joystick = (JoystickView) findViewById(R.id.joystickView);
+        JoystickView joystick = findViewById(R.id.joystickView);
         joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
@@ -45,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
                 mAngle.setText("Angle : " + angle +"°");
                 float deltaX = (float) (cos(angle/180.0 * 3.14159) * (strength/100.0)*30);
                 float deltaY = (float) (-sin(angle/180.0 * 3.14159) * (strength/100.0)*30);
-
                 image = findViewById(R.id.image);
+                Setup.getMainPlayer().getPosition().movePosition((int) image.getX(), (int)image.getY());
+
                 image.setY(image.getY() + deltaY);
                 image.setX(image.getX() + deltaX);
                 /*image.setImageResource(R.drawable.ic_krok);

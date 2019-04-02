@@ -24,12 +24,9 @@ public class ClientConnexion extends AsyncTask<Void,Void,Void> {
 
     private String command ;
 
-    private Player player;
+    private String host = "192.168.1.2";
 
-    private String host = "161.3.26.62";
-
-    private int port = 7777;
-
+    private int port = 7778;
 
 
     @Override
@@ -72,12 +69,12 @@ public class ClientConnexion extends AsyncTask<Void,Void,Void> {
                 System.out.println("\t * " + name + " : Réponse reçue " + response);
 
                 String tabInfos[] = response.split(",");
-                if (player==null) {
-                    player=new Player(this,Integer.parseInt(tabInfos[0]),tabInfos[1],tabInfos[2]);
-                    command= player.getPlayerID() +","+ player.getPosition().toString();
+                if (Setup.getMainPlayer().getPlayerID()==0) {
+                    Setup.setMainPlayer(new Player(this,Integer.parseInt(tabInfos[0]),tabInfos[1],tabInfos[2]));
+                    command= Setup.getMainPlayer().getPlayerID() +","+ Setup.getMainPlayer().getPosition().toString();
                 }
-                else if(player.getPlayerID()==Integer.parseInt(tabInfos[0]))
-                    command = player.getPlayerID() +","+ player.getPosition().toString();
+                else if(Setup.getMainPlayer().getPlayerID()==Integer.parseInt(tabInfos[0]))
+                    command = Setup.getMainPlayer().getPlayerID() +","+ Setup.getMainPlayer().getPosition().toString();
 
                 else command="Erreur";
 

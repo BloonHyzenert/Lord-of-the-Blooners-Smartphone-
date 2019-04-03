@@ -43,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
             public void onMove(int angle, int strength) {
                 mForce.setText("Force : " + strength +"%");
                 mAngle.setText("Angle : " + angle +"°");
-                float deltaX = (float) (cos(angle/180.0 * 3.14159) * (strength/100.0)*30);
-                float deltaY = (float) (-sin(angle/180.0 * 3.14159) * (strength/100.0)*30);
+                float deltaX = (float) (cos(angle/180.0 * 3.14159) * (strength/100.0)*6);
+                float deltaY = (float) (-sin(angle/180.0 * 3.14159) * (strength/100.0)*6);
                 image = findViewById(R.id.image);
+                Setup.getMainPlayer().setDeltaPosition(new Position((int)deltaX, (int)deltaY));
                 Setup.getMainPlayer().getPosition().movePosition((int) image.getX(), (int)image.getY());
 
                 image.setY(image.getY() + deltaY);

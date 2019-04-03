@@ -70,11 +70,11 @@ public class ClientConnexion extends AsyncTask<Void,Void,Void> {
 
                 String tabInfos[] = response.split(",");
                 if (Setup.getMainPlayer().getPlayerID()==0) {
-                    Setup.setMainPlayer(new Player(this,Integer.parseInt(tabInfos[0]),tabInfos[1],tabInfos[2]));
-                    command= Setup.getMainPlayer().getPlayerID() +","+ Setup.getMainPlayer().getPosition().toString();
+                    Setup.setMainPlayer(new Player(this,Integer.parseInt(tabInfos[0]),tabInfos[1],tabInfos[2],Integer.parseInt(tabInfos[3]), Integer.parseInt(tabInfos[4])));
+                    command= Setup.getMainPlayer().getPlayerID() +","+ Setup.getMainPlayer().getDeltaPosition().toString();
                 }
                 else if(Setup.getMainPlayer().getPlayerID()==Integer.parseInt(tabInfos[0]))
-                    command = Setup.getMainPlayer().getPlayerID() +","+ Setup.getMainPlayer().getPosition().toString();
+                    command = Setup.getMainPlayer().getPlayerID() +","+ Setup.getMainPlayer().getDeltaPosition().toString();
 
                 else command="Erreur";
 
@@ -86,7 +86,7 @@ public class ClientConnexion extends AsyncTask<Void,Void,Void> {
 
             try {
                 Thread.currentThread();
-                Thread.sleep(2000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

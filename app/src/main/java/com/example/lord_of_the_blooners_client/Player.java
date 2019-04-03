@@ -13,10 +13,13 @@ public class Player {
 
     private Position position;
 
-    public Player(ClientConnexion dialog, int tplayerID,String tPseudo, String team) {
+    private Position deltaPosition;
+
+    public Player(ClientConnexion dialog, int tplayerID,String tPseudo, String team, int x, int y) {
         setDialog(dialog);
         playerID=tplayerID;
-        position = new Position();
+        position = new Position(x, y);
+        deltaPosition = new Position();
         setTeam(team);
         setPseudo(tPseudo);
     }
@@ -43,6 +46,14 @@ public class Player {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Position getDeltaPosition() {
+        return deltaPosition;
+    }
+
+    public void setDeltaPosition(Position deltaPosition) {
+        this.deltaPosition = deltaPosition;
     }
 
     public String getTeam() {

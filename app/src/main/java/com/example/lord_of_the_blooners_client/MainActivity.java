@@ -1,10 +1,20 @@
 package com.example.lord_of_the_blooners_client;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.provider.ContactsContract;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.AbsoluteLayout;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,41 +32,58 @@ import static java.lang.Math.sin;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mForce;
-    private TextView mAngle;
-    private ImageView image;
+    private Button connexionButton;
+    private EditText nomJoueur;
+    private String pseudo;
 
+    private String blockCharacterSet = "\\~#^|$%&*!,\n\t .";
+
+    private InputFilter filter = new InputFilter() {
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mForce = findViewById(R.id.textView);
-        mAngle = findViewById(R.id.textView2);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        connexionButton = findViewById(R.id.connexion);
+        nomJoueur = findViewById(R.id.nom_joueur);
+        nomJoueur.setFilters(new InputFilter[] { filter, new InputFilter.LengthFilter(10)});
+        connexionButton.setEnabled(false);
 
-
-        ClientConnexion client=new ClientConnexion();
-        client.execute();
-
-        JoystickView joystick = findViewById(R.id.joystickView);
-        joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
+        nomJoueur.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onMove(int angle, int strength) {
-                mForce.setText("Force : " + strength +"%");
-                mAngle.setText("Angle : " + angle +"°");
-                float deltaX = (float) (cos(angle/180.0 * 3.14159) * (strength/100.0)*6);
-                float deltaY = (float) (-sin(angle/180.0 * 3.14159) * (strength/100.0)*6);
-                image = findViewById(R.id.image);
-                Setup.getMainPlayer().setDeltaPosition(new Position((int)deltaX, (int)deltaY));
-                Setup.getMainPlayer().getPosition().movePosition((int) image.getX(), (int)image.getY());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                image.setY(image.getY() + deltaY);
-                image.setX(image.getX() + deltaX);
-                /*image.setImageResource(R.drawable.ic_krok);
-                par = (ConstraintLayout.LayoutParams)image.getLayoutParams();
-                par.editorAbsoluteX += deltaX;
-                par.editorAbsoluteY += deltaY;
-                System.out.println("par.editorAbsoluteX : " + par.editorAbsoluteX + "   deltaX : " + deltaX + "\npar.editorAbsoluteY : " + par.editorAbsoluteY + "  deltaY : " + deltaY);
-                image.setLayoutParams(par);*/
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                connexionButton.setEnabled(s.toString().length() != 0); // dévérouille le boutton si le champ comporte au moins un caractère, le verrouille sinon
+                pseudo = s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        connexionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gameActivity = new Intent(MainActivity.this, GameActivity.class);
+                gameActivity.putExtra("pseudo", pseudo);
+                startActivity(gameActivity);
             }
         });
     }

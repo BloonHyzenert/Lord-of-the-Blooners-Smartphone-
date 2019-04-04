@@ -13,7 +13,7 @@ import java.net.Socket;
 
 import java.net.UnknownHostException;
 
-public class ClientConnexion extends AsyncTask<Void,Void,Void> {
+public class ClientConnexion extends AsyncTask<String,Void,Void> {
 
 
     private Socket connexion = null;
@@ -24,15 +24,15 @@ public class ClientConnexion extends AsyncTask<Void,Void,Void> {
 
     private String command ;
 
-    private String host = "192.168.1.2";
+    private String host = "192.168.43.144";
 
     private int port = 7778;
 
 
     @Override
-    protected Void doInBackground(Void... voids) {
-        String name = "Bloon";
-
+    protected Void doInBackground(String... params) {
+        String name = params[0];
+        //if (params[1])
 
         if(connexion==null) {
             try {
@@ -56,7 +56,7 @@ public class ClientConnexion extends AsyncTask<Void,Void,Void> {
 
         while (connexion!=null) {
             if(command==null)
-                command="0,Bloon";
+                command="0,"+ name;
 
             writer.write(command);
             writer.flush();
@@ -86,7 +86,7 @@ public class ClientConnexion extends AsyncTask<Void,Void,Void> {
 
             try {
                 Thread.currentThread();
-                Thread.sleep(100);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

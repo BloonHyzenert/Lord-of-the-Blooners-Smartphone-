@@ -32,8 +32,9 @@ public class ClientConnexion extends AsyncTask<String,Void,Void> {
     @Override
     protected Void doInBackground(String... params) {
         String name = params[0];
-        //if (params[1])
-
+        if (params[1] != null) {
+            host = params[1];
+        }
         if(connexion==null) {
             try {
                 InetAddress hostAddress = InetAddress.getByName(host);

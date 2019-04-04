@@ -32,8 +32,9 @@ public class GameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String pseudo = intent.getStringExtra("pseudo");
+        String adresseIP = intent.getStringExtra("IP");
         ClientConnexion client = new ClientConnexion();
-        client.execute(pseudo);
+        client.execute(pseudo, adresseIP);
 
         JoystickView joystick = findViewById(R.id.joystickView);
         joystick.setFixedCenter(false);

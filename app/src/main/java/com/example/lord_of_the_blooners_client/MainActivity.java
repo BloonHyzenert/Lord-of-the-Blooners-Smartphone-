@@ -34,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button connexionButton;
     private EditText nomJoueur;
+    private EditText ipServeur;
     private String pseudo;
+    private String adresseIP;
 
     private String blockCharacterSet = "\\~#^|$%&*!,\n\t .";
 
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        ipServeur = findViewById(R.id.ip_serveur);
         connexionButton = findViewById(R.id.connexion);
         nomJoueur = findViewById(R.id.nom_joueur);
         nomJoueur.setFilters(new InputFilter[] { filter, new InputFilter.LengthFilter(10)});
@@ -78,11 +81,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ipServeur.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adresseIP = s.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         connexionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent gameActivity = new Intent(MainActivity.this, GameActivity.class);
                 gameActivity.putExtra("pseudo", pseudo);
+                gameActivity.putExtra("IP", adresseIP);
                 startActivity(gameActivity);
             }
         });

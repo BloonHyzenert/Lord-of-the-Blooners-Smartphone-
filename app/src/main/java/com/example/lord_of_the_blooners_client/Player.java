@@ -1,18 +1,12 @@
 package com.example.lord_of_the_blooners_client;
-import java.net.Socket;
 
 public class Player {
 
     private int playerID;
-
     private String pseudo;
-
-    private String team;
-
+    private Team team;
     private ClientConnexion dialog;
-
     private Position position;
-
     private Position deltaPosition;
 
     public Player(ClientConnexion dialog, int tplayerID,String tPseudo, String team, int x, int y) {
@@ -20,11 +14,24 @@ public class Player {
         playerID=tplayerID;
         position = new Position(x, y);
         deltaPosition = new Position();
-        setTeam(team);
+        switch(team){
+            case "Krok":
+                Setup.getKrok().addPlayer(this);
+                break;
+            case "Blurp":
+                Setup.getBlurp().addPlayer(this);
+                break;
+            case "Grounch":
+                Setup.getGrounch().addPlayer(this);
+                break;
+                default:
+                    setTeam(null);
+                    break;
+        }
         setPseudo(tPseudo);
     }
 
-    public void move(int dx, int dy) {
+    public void setPosition(int dx, int dy) {
         setPosition(new Position(position.getX()+dx,position.getY()+dy));
     }
 
@@ -56,11 +63,11 @@ public class Player {
         this.deltaPosition = deltaPosition;
     }
 
-    public String getTeam() {
+    public Team getTeam() {
         return team;
     }
 
-    public void setTeam(String team) {
+    public void setTeam(Team team) {
         this.team = team;
     }
 

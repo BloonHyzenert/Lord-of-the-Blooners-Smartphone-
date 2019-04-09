@@ -47,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
                 float deltaY = (float) (-sin(angle/180.0 * 3.14159) * (strength/100.0)*6);
                 image = findViewById(R.id.image);
                 Setup.getMainPlayer().setDeltaPosition(new Position((int)deltaX, (int)deltaY));
-                Setup.getMainPlayer().getPosition().movePosition((int) image.getX(), (int)image.getY());
+                Setup.getMainPlayer().setPosition((int) image.getX(), (int)image.getY());
 
                 image.setY(image.getY() + deltaY);
                 image.setX(image.getX() + deltaX);

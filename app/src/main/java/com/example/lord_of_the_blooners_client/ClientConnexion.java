@@ -39,6 +39,7 @@ public class ClientConnexion extends AsyncTask<String,Void,Void> {
                     command = "0," + name;
                     writer.write(command);
                     writer.flush();
+                    Setup.setConnected(true);
                 } catch (UnknownHostException e) {
                     connexion=null;
                 } catch (IOException e) {

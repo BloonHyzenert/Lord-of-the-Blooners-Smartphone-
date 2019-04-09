@@ -22,6 +22,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
 
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private String pseudo;
     private String adresseIP;
 
-    private String blockCharacterSet = "\\~#^|$%&*!,\n\t .";
+    private String blockCharacterSet = "\\~#^|$%&*!,\n\t.";
 
     private InputFilter filter = new InputFilter() {
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Configuration.end = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -101,10 +103,18 @@ public class MainActivity extends AppCompatActivity {
         connexionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gameActivity = new Intent(MainActivity.this, GameActivity.class);
-                gameActivity.putExtra("pseudo", pseudo);
-                gameActivity.putExtra("IP", adresseIP);
-                startActivity(gameActivity);
+                ClientConnexion client = new ClientConnexion();
+                client.execute(pseudo, adresseIP);
+
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (Setup.getConnected()){
+                    Intent gameActivity = new Intent(MainActivity.this, GameActivity.class);
+                    startActivity(gameActivity);
+                }
             }
         });
     }

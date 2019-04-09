@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Setup {
+	private static boolean connected = false;
     private static Player mainPlayer ;
 	private static Team krok = new Team("Krok", "yellow");
 	private static Team grounch = new Team("Grounch", "red");
@@ -30,6 +31,12 @@ public class Setup {
 
 	public static Team getBlurp() {
 		return blurp;
+	}
+
+	public static boolean getConnected(){ return connected; }
+
+	public static void setConnected(boolean connected) {
+		Setup.connected = connected;
 	}
 
 	public static Team getItem() {

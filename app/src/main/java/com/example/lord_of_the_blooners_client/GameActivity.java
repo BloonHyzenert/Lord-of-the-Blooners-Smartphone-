@@ -1,5 +1,7 @@
 package com.example.lord_of_the_blooners_client;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,30 @@ import static java.lang.Math.sin;
 public class GameActivity extends AppCompatActivity {
 
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Déconnexion")
+                .setMessage("Etes vous sûr de vouloir vous déconnecter?")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent MainActivity = new Intent(GameActivity.this, MainActivity.class);
+                        startActivity(MainActivity);
+                        Setup.setConnected(false);
+                        Configuration.end = true;
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+    }
+
     private TextView mForce;
     private TextView mAngle;
     private ImageView image;
@@ -30,11 +56,12 @@ public class GameActivity extends AppCompatActivity {
         mAngle = findViewById(R.id.textView2);
 
 
+        /*
         Intent intent = getIntent();
         String pseudo = intent.getStringExtra("pseudo");
         String adresseIP = intent.getStringExtra("IP");
         ClientConnexion client = new ClientConnexion();
-        client.execute(pseudo, adresseIP);
+        client.execute(pseudo, adresseIP);*/
 
         JoystickView joystick = findViewById(R.id.joystickView);
         joystick.setFixedCenter(false);

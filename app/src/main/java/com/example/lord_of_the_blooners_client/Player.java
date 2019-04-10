@@ -9,7 +9,7 @@ public class Player {
     private Position position;
     private Position deltaPosition;
 
-    public Player(ClientConnexion dialog, int tplayerID,String tPseudo, String team, int x, int y) {
+    public Player(ClientConnexion dialog, int tplayerID,String tPseudo, String team, double x, double y) {
         setDialog(dialog);
         playerID=tplayerID;
         position = new Position(x, y);
@@ -31,7 +31,7 @@ public class Player {
         setPseudo(tPseudo);
     }
 
-    public void setPosition(int dx, int dy) {
+    public void setPosition(double dx, double dy) {
         setPosition(new Position(position.getX()+dx,position.getY()+dy));
     }
 

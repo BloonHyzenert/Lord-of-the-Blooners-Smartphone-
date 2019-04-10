@@ -70,14 +70,14 @@ public class GameActivity extends AppCompatActivity {
             public void onMove(int angle, int strength) {
                 mForce.setText("Force : " + strength +"%");
                 mAngle.setText("Angle : " + angle +"°");
-                float deltaX = (float) (cos(angle/180.0 * 3.14159) * (strength/100.0)*6);
-                float deltaY = (float) (-sin(angle/180.0 * 3.14159) * (strength/100.0)*6);
+                double deltaX = cos(angle/180.0 * 3.14159) * (strength/100.0)*6;
+                double deltaY = -sin(angle/180.0 * 3.14159) * (strength/100.0)*6;
                 image = findViewById(R.id.image);
-                Setup.getMainPlayer().setDeltaPosition(new Position((int)deltaX, (int)deltaY));
-                Setup.getMainPlayer().setPosition((int) image.getX(), (int)image.getY());
+                Setup.getMainPlayer().setDeltaPosition(new Position(deltaX, deltaY));
+                Setup.getMainPlayer().setPosition(image.getX(), image.getY());
 
-                image.setY(image.getY() + deltaY);
-                image.setX(image.getX() + deltaX);
+                image.setY((float) (image.getY() + deltaY));
+                image.setX((float) (image.getX() + deltaX));
                 /*image.setImageResource(R.drawable.ic_krok);
                 par = (ConstraintLayout.LayoutParams)image.getLayoutParams();
                 par.editorAbsoluteX += deltaX;

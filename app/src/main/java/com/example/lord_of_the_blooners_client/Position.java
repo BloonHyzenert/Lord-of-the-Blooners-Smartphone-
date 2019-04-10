@@ -2,32 +2,32 @@ package com.example.lord_of_the_blooners_client;
 
 public class Position {
 
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
     public Position() {
-        setX(0);
-        setY(0);
+        this.setX(0);
+        this.setY(0);
     }
 
-    public Position(int tx, int ty) {
-        setX(tx);
-        setY(ty);
+    public Position(double tx, double ty) {
+        this.setX(tx);
+        this.setY(ty);
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 

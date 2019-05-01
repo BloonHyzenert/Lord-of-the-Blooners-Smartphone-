@@ -4,8 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,21 +73,26 @@ public class GameActivity extends AppCompatActivity {
             public void onMove(int angle, int strength) {
                 mForce.setText("Force : " + strength +"%");
                 mAngle.setText("Angle : " + angle +"°");
-                double deltaX = cos(angle/180.0 * 3.14159) * (strength/100.0)*6;
-                double deltaY = -sin(angle/180.0 * 3.14159) * (strength/100.0)*6;
-                image = findViewById(R.id.image);
+                double deltaX = cos(angle/180.0 * 3.14159) * (strength/100.0);
+                double deltaY = -sin(angle/180.0 * 3.14159) * (strength/100.0);
+                //image = findViewById(R.id.image);
                 Setup.getMainPlayer().setDeltaPosition(new Position(deltaX, deltaY));
-                Setup.getMainPlayer().setPosition(image.getX(), image.getY());
-
-                image.setY((float) (image.getY() + deltaY));
-                image.setX((float) (image.getX() + deltaX));
-                /*image.setImageResource(R.drawable.ic_krok);
-                par = (ConstraintLayout.LayoutParams)image.getLayoutParams();
-                par.editorAbsoluteX += deltaX;
-                par.editorAbsoluteY += deltaY;
-                System.out.println("par.editorAbsoluteX : " + par.editorAbsoluteX + "   deltaX : " + deltaX + "\npar.editorAbsoluteY : " + par.editorAbsoluteY + "  deltaY : " + deltaY);
-                image.setLayoutParams(par);*/
+                //Setup.getMainPlayer().setPosition(image.getX(), image.getY());
             }
         }, 17);
+
+        ImageView image = findViewById(R.id.image);
+
+        image.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    Setup.getMainPlayer().setEtat(1);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    Setup.getMainPlayer().setEtat(0);
+                }
+                return true;
+            }
+        });
     }
 }

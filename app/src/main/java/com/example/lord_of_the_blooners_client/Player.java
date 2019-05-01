@@ -8,9 +8,11 @@ public class Player {
     private ClientConnexion dialog;
     private Position position;
     private Position deltaPosition;
+    private int etat;
 
     public Player(ClientConnexion dialog, int tplayerID,String tPseudo, String team, double x, double y) {
         setDialog(dialog);
+        etat = 0;
         playerID=tplayerID;
         position = new Position(x, y);
         deltaPosition = new Position();
@@ -33,6 +35,14 @@ public class Player {
 
     public void setPosition(double dx, double dy) {
         setPosition(new Position(position.getX()+dx,position.getY()+dy));
+    }
+
+    public int getEtat(){
+        return etat;
+    }
+
+    public void setEtat(int etat){
+        this.etat = etat;
     }
 
     public int getPlayerID() {

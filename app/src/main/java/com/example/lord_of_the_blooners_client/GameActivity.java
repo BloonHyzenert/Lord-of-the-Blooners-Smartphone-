@@ -4,12 +4,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,8 +55,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        mForce = findViewById(R.id.textView);
-        mAngle = findViewById(R.id.textView2);
+        //mForce = findViewById(R.id.textView);
+        //mAngle = findViewById(R.id.textView2);
 
 
         /*
@@ -71,8 +71,8 @@ public class GameActivity extends AppCompatActivity {
         joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
             @Override
             public void onMove(int angle, int strength) {
-                mForce.setText("Force : " + strength +"%");
-                mAngle.setText("Angle : " + angle +"°");
+                //mForce.setText("Force : " + strength +"%");
+                //mAngle.setText("Angle : " + angle +"°");
                 double deltaX = cos(angle/180.0 * 3.14159) * (strength/100.0);
                 double deltaY = -sin(angle/180.0 * 3.14159) * (strength/100.0);
                 //image = findViewById(R.id.image);
@@ -81,9 +81,9 @@ public class GameActivity extends AppCompatActivity {
             }
         }, 17);
 
-        ImageView image = findViewById(R.id.image);
+        Button button = findViewById(R.id.button_bloon);
 
-        image.setOnTouchListener(new View.OnTouchListener() {
+        button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {

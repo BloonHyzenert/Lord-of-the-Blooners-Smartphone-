@@ -20,7 +20,7 @@ public class ClientConnexion extends AsyncTask<String,Void,Void> {
     private BufferedInputStream reader = null;
     private String command ;
     private String host = "192.168.1.2";
-    private int port = 7778;
+    private int port = 8005;
 
 
     @Override
@@ -57,6 +57,7 @@ public class ClientConnexion extends AsyncTask<String,Void,Void> {
                                 Setup.setMainPlayer(new Player(this, Integer.parseInt(tabInfos[1]), tabInfos[2], tabInfos[3], Double.parseDouble(tabInfos[4]), Double.parseDouble(tabInfos[5])));
                                 command = "1," + Setup.getMainPlayer().getDeltaPosition().toString() + "," + Setup.getMainPlayer().getEtat();                                break;
                             case 1:
+                                Setup.getMainPlayer().swap(tabInfos[3]);
                                 command = "1," + Setup.getMainPlayer().getDeltaPosition().toString() + "," + Setup.getMainPlayer().getEtat();
                                 break;
                             default:

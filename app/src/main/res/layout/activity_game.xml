@@ -7,21 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-    <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/joystickView"
-        android:layout_width="213dp"
-        android:layout_height="220dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginBottom="30dp"
-        custom:JV_backgroundColor="#BBBBBB"
-        custom:JV_borderColor="#AAAAAA"
-        custom:JV_borderWidth="4dp"
-        custom:JV_buttonColor="#888888"
-        custom:JV_buttonSizeRatio="25%"
-        custom:JV_fixedCenter="false"
-        custom:layout_constraintBottom_toBottomOf="parent"
-        custom:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Empty"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/buttonHolder"
@@ -31,20 +30,37 @@
         android:layout_alignParentRight="true"
         android:weightSum="2" >
 
-        <Button
-            android:id="@+id/button_hidden"
+        <io.github.controlwear.virtual.joystick.android.JoystickView
+            android:id="@+id/joystickView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible"
-            android:layout_weight="1" />
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="1"
+            app:JV_backgroundColor="#BBBBBB"
+            app:JV_borderColor="#AAAAAA"
+            app:JV_borderWidth="4dp"
+            app:JV_buttonColor="#888888"
+            app:JV_buttonSizeRatio="25%"
+            app:JV_fixedCenter="false" />
 
-        <Button
-            android:id="@+id/button_bloon"
+        <io.github.controlwear.virtual.joystick.android.JoystickView
+            android:id="@+id/joystickView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
-            android:text="Dash"
-            android:layout_weight="1" />
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="1"
+            app:JV_backgroundColor="#BBBBBB"
+            app:JV_borderColor="#AAAAAA"
+            app:JV_borderWidth="4dp"
+            app:JV_buttonColor="#BBBBBB"
+            app:JV_buttonSizeRatio="25%"
+            app:JV_fixedCenter="true" />
+
+
 
     </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.example.lord_of_the_blooners_client;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Vibrator;
 import android.provider.ContactsContract;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        Setup.vibrator = (Vibrator) getSystemService(getApplicationContext().VIBRATOR_SERVICE);
 
         connexionButton.setOnClickListener(new View.OnClickListener() {
             @Override

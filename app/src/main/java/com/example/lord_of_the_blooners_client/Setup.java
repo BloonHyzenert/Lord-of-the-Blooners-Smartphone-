@@ -1,5 +1,8 @@
 package com.example.lord_of_the_blooners_client;
 
+import android.os.Vibrator;
+import android.support.constraint.ConstraintLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +14,9 @@ public class Setup {
 	private static Team blurp = new Team("Blurp", "blue");
 	private static Team item = new Team("Item", "white");
 	private static List<Player> playerList = new ArrayList<Player>();
+	public static Vibrator vibrator;
 
-    public static Player getMainPlayer() {
+	public static Player getMainPlayer() {
         return mainPlayer;
     }
 

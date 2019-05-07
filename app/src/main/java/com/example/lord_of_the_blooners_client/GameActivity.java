@@ -1,15 +1,18 @@
 package com.example.lord_of_the_blooners_client;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.os.Vibrator;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +22,21 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
 public class GameActivity extends AppCompatActivity {
+
+    private static ConstraintLayout background;
+
+    public static ConstraintLayout getLayout() {
+        return background;
+    }
+
+    public void setBackgroundColor(final int color){
+        runOnUiThread(new Thread(new Runnable() {
+            public void run() {
+            GameActivity.getLayout().setBackgroundColor(color);
+            Setup.vibrator.vibrate(200);
+        }}
+        ));
+    }
 
 
     @Override
@@ -45,14 +63,14 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private TextView mForce;
-    private TextView mAngle;
-    private ImageView image;
 
+    public static GameActivity game;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        game = GameActivity.this;
+        GameActivity.background = findViewById(R.id.constraintLayout);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //mForce = findViewById(R.id.textView);
@@ -81,9 +99,9 @@ public class GameActivity extends AppCompatActivity {
             }
         }, 17);
 
-        Button button = findViewById(R.id.button_bloon);
+        JoystickView joystick2 = findViewById(R.id.joystickView2);
 
-        button.setOnTouchListener(new View.OnTouchListener() {
+        joystick2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {

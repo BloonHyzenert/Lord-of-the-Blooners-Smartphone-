@@ -1,5 +1,7 @@
 package com.example.lord_of_the_blooners_client;
 
+import android.graphics.Color;
+
 public class Player {
 
     private int playerID;
@@ -16,21 +18,65 @@ public class Player {
         playerID=tplayerID;
         position = new Position(x, y);
         deltaPosition = new Position();
+
+        int color = Color.BLACK;
         switch(team){
             case "Krok":
                 Setup.getKrok().addPlayer(this);
+                color = Color.YELLOW;
                 break;
             case "Blurp":
                 Setup.getBlurp().addPlayer(this);
+                color = Color.BLUE;
                 break;
             case "Grounch":
                 Setup.getGrounch().addPlayer(this);
+                color = Color.RED;
                 break;
-                default:
-                    setTeam(null);
-                    break;
+            default:
+                setTeam(null);
+                break;
         }
+        if (GameActivity.game!=null)
+            GameActivity.game.setBackgroundColor(color);
+
         setPseudo(tPseudo);
+    }
+
+
+
+    public void swap(String team){
+        if (this.team.getName().equals(team))
+            return;
+        int color = Color.BLACK;
+        switch(team){
+            case "Krok":
+                if (this.getTeam()!=null)
+                    Setup.getKrok().addPlayer(this.getTeam().removePlayer(this));
+                else
+                    Setup.getKrok().addPlayer(this);
+                color = Color.YELLOW;
+                break;
+            case "Blurp":
+                if(this.getTeam()!=null)
+                    Setup.getBlurp().addPlayer(this.getTeam().removePlayer(this));
+                else
+                    Setup.getBlurp().addPlayer(this);
+                color = Color.BLUE;
+                break;
+            case "Grounch":
+                if (this.getTeam()!=null)
+                    Setup.getGrounch().addPlayer(this.getTeam().removePlayer(this));
+                else
+                    Setup.getGrounch().addPlayer(this);
+                color = Color.RED;
+                break;
+            default:
+                setTeam(null);
+                break;
+        }
+        if (GameActivity.game!=null)
+            GameActivity.game.setBackgroundColor(color);
     }
 
     public void setPosition(double dx, double dy) {

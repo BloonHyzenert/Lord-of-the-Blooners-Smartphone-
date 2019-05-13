@@ -24,10 +24,14 @@ import static java.lang.Math.sin;
 public class GameActivity extends AppCompatActivity {
 
     private static ConstraintLayout background;
+    private static TextView player_score;
+    private static TextView player_id;
 
     public static ConstraintLayout getLayout() {
         return background;
     }
+    public static TextView getTextScore() {return player_score; }
+    public static TextView getTextId() {return player_id; }
 
     public void setBackgroundColor(final int color){
         runOnUiThread(new Thread(new Runnable() {
@@ -38,6 +42,14 @@ public class GameActivity extends AppCompatActivity {
         ));
     }
 
+    public void setTextScore(final int score){
+        runOnUiThread(new Thread(new Runnable() {
+            public void run() {
+                GameActivity.getTextScore().setText("Score : " + score);
+                GameActivity.getTextId().setText("" +Setup.getMainPlayer().getPlayerID());
+            }}
+        ));
+    }
 
     @Override
     public void onBackPressed() {
@@ -71,10 +83,14 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         game = GameActivity.this;
         GameActivity.background = findViewById(R.id.constraintLayout);
+        GameActivity.player_score = findViewById(R.id.player_score);
+        GameActivity.player_score.setText("0");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //mForce = findViewById(R.id.textView);
         //mAngle = findViewById(R.id.textView2);
+
+        player_id = findViewById(R.id.player_id);
 
 
         /*

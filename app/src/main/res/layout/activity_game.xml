@@ -8,38 +8,34 @@
     tools:context=".GameActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:fontFamily="@font/candy"
+        android:id="@+id/player_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Empty"
-        android:visibility="invisible"
+        android:textSize="37dp"
+        android:text="Score : 0"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/buttonHolder"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="25dp"
-        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_alignParentRight="true"
-        android:weightSum="2" >
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <io.github.controlwear.virtual.joystick.android.JoystickView
             android:id="@+id/joystickView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginBottom="0dp"
-            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:layout_alignParentStart="true"
             app:JV_backgroundColor="#BBBBBB"
             app:JV_borderColor="#AAAAAA"
             app:JV_borderWidth="4dp"
@@ -51,10 +47,9 @@
             android:id="@+id/joystickView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginBottom="0dp"
-            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentEnd="true"
             app:JV_backgroundColor="#BBBBBB"
             app:JV_borderColor="#AAAAAA"
             app:JV_borderWidth="4dp"
@@ -63,7 +58,22 @@
             app:JV_fixedCenter="true" />
 
 
+    </RelativeLayout>
 
-    </LinearLayout>
+    <TextView
+        android:fontFamily="@font/candy"
+        android:id="@+id/player_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="120dp"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -57,6 +57,7 @@ public class ClientConnexion extends AsyncTask<String,Void,Void> {
                                 Setup.setMainPlayer(new Player(this, Integer.parseInt(tabInfos[1]), tabInfos[2], tabInfos[3], Double.parseDouble(tabInfos[4]), Double.parseDouble(tabInfos[5])));
                                 command = "1," + Setup.getMainPlayer().getDeltaPosition().toString() + "," + Setup.getMainPlayer().getEtat();                                break;
                             case 1:
+                                Setup.getMainPlayer().setScore(Integer.parseInt(tabInfos[4]));
                                 Setup.getMainPlayer().swap(tabInfos[3]);
                                 command = "1," + Setup.getMainPlayer().getDeltaPosition().toString() + "," + Setup.getMainPlayer().getEtat();
                                 break;

@@ -11,12 +11,14 @@ public class Player {
     private Position position;
     private Position deltaPosition;
     private int etat;
+    private int score;
 
     public Player(ClientConnexion dialog, int tplayerID,String tPseudo, String team, double x, double y) {
         setDialog(dialog);
         etat = 0;
         playerID=tplayerID;
         position = new Position(x, y);
+        this.score = 0;
         deltaPosition = new Position();
 
         int color = Color.BLACK;
@@ -43,7 +45,15 @@ public class Player {
         setPseudo(tPseudo);
     }
 
+    public int getScore() {
+        return score;
+    }
 
+    public void setScore(int score) {
+        this.score = score;
+        if (GameActivity.game!=null)
+            GameActivity.game.setTextScore(score);
+    }
 
     public void swap(String team){
         if (this.team.getName().equals(team))
